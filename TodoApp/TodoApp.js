@@ -18,6 +18,7 @@ function TodoApp() {
   const [listItems, setListItems] = useState(data)
   // const [addItem, setAddItem] = useState('hi')
 
+  // 原本的 addItem 被 item 取代，由於 "const [addItem, setAddItem] = useState('hi')" 被移至 App.js，設一個新的值來判斷用戶輸入的是否為空字串
   const addTodo = (arr, item) => {
     if (item.item === '') {
       return [...arr]
@@ -48,6 +49,15 @@ function TodoApp() {
   return (
     <>
       <h3>ToDo List</h3>
+      {/* 為了簡化要傳遞到子元件的屬性，把只在該元件會用到的屬性打包成函式傳遞，避免寫一大串像是
+        <Add 
+          addItem={addItem}
+          setAddItem={setAddItem} 
+          listItems={listItems} 
+          setListItems={setListItems} 
+          addTodo={addTodo} 
+        />
+       */}
       <Add handleAddItem={handleAddItem} />
       <List
         listItems={listItems}

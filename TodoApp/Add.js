@@ -22,6 +22,7 @@ function Add(props) {
           //   setListItems(addTodo(listItems))
           const newItem = { item: addItem, count: 1, id: v4(), done: false }
           handleAddItem(newItem)
+          // 其實就等於執行 setListItems(addTodo(listItems, item))
           setAddItem('')
         }}
       >
