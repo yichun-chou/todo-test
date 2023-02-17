@@ -4,7 +4,7 @@ import { v4 } from 'uuid'
 import '../TodoApp.css'
 
 import Add from './Add'
-import List from './List'
+import List from './TodoList'
 
 function TodoApp() {
   const data = [
