@@ -1,4 +1,5 @@
 import React from 'react'
+import TodoItem from './TodoItem'
 
 function List(props) {
   const { listItems, setListItems, delTodo, toggleDone } = props
@@ -6,30 +7,17 @@ function List(props) {
     <>
       <ul>
         {listItems.map((el) => {
+          const { id, done, item } = el
           return (
-            <li
-              key={el.id}
-              style={{ listStyleType: 'none' }}
-              className={el.done ? 'active' : ''}
-            >
-              <input
-                type="checkbox"
-                name=""
-                id=""
-                checked={el.done}
-                onChange={(e) => {
-                  setListItems(toggleDone(listItems, el.id))
-                }}
-              />
-              {el.item} <button>edit</button>{' '}
-              <button
-                onClick={() => {
-                  setListItems(delTodo(listItems, el.id))
-                }}
-              >
-                del
-              </button>
-            </li>
+            <TodoItem
+              id={id}
+              done={done}
+              item={item}
+              listItems={listItems}
+              setListItems={setListItems}
+              toggleDone={toggleDone}
+              delTodo={delTodo}
+            />
           )
         })}
       </ul>
