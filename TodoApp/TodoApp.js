@@ -16,10 +16,10 @@ function TodoApp() {
   const [currentFilter, setCurrentFilter] = useState('all')
 
   const [listItems, setListItems] = useState(data)
-  const [addItem, setAddItem] = useState('hi')
+  // const [addItem, setAddItem] = useState('hi')
 
   const addTodo = (arr, item) => {
-    if (addItem === '') {
+    if (item.item === '') {
       return [...arr]
     } else {
       return [item, ...arr]
@@ -48,11 +48,7 @@ function TodoApp() {
   return (
     <>
       <h3>ToDo List</h3>
-      <Add
-        addItem={addItem}
-        setAddItem={setAddItem}
-        handleAddItem={handleAddItem}
-      />
+      <Add handleAddItem={handleAddItem} />
       <List
         listItems={listItems}
         setListItems={setListItems}

@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { v4 } from 'uuid'
 
 function Add(props) {
-  const { addItem, setAddItem, handleAddItem } = props
+  const { handleAddItem } = props
+  const [addItem, setAddItem] = useState('hi')
+
   return (
     <>
       <label htmlFor="todo">todo: </label>
