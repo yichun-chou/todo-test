@@ -10,6 +10,7 @@ function List(props) {
           const { id, done, item } = el
           return (
             <TodoItem
+              key={id}
               id={id}
               done={done}
               item={item}

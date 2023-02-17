@@ -13,15 +13,16 @@ function TodoApp() {
     { item: 'beef', count: 3, id: v4(), done: false },
   ]
   const filterStyle = ['all', 'checked', 'unchecked']
-  const [listItems, setListItems] = useState(data)
-  const [addItem, setAddItem] = useState('hi')
   const [currentFilter, setCurrentFilter] = useState('all')
 
-  const addTodo = (arr) => {
+  const [listItems, setListItems] = useState(data)
+  const [addItem, setAddItem] = useState('hi')
+
+  const addTodo = (arr, item) => {
     if (addItem === '') {
       return [...arr]
     } else {
-      return [{ item: addItem, count: 1, id: v4(), done: false }, ...arr]
+      return [item, ...arr]
     }
   }
   const delTodo = (arr, id) => {
@@ -39,15 +40,18 @@ function TodoApp() {
     })
   }
 
+  // for Add to simplify ur code
+  const handleAddItem = (item) => {
+    setListItems(addTodo(listItems, item))
+  }
+
   return (
     <>
       <h3>ToDo List</h3>
       <Add
         addItem={addItem}
         setAddItem={setAddItem}
-        listItems={listItems}
-        setListItems={setListItems}
-        addTodo={addTodo}
+        handleAddItem={handleAddItem}
       />
       <List
         listItems={listItems}

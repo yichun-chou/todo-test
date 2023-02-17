@@ -1,7 +1,8 @@
 import React from 'react'
+import { v4 } from 'uuid'
 
 function Add(props) {
-  const { addItem, setAddItem, listItems, setListItems, addTodo } = props
+  const { addItem, setAddItem, handleAddItem } = props
   return (
     <>
       <label htmlFor="todo">todo: </label>
@@ -16,7 +17,9 @@ function Add(props) {
       />
       <button
         onClick={() => {
-          setListItems(addTodo(listItems))
+          //   setListItems(addTodo(listItems))
+          const newItem = { item: addItem, count: 1, id: v4(), done: false }
+          handleAddItem(newItem)
           setAddItem('')
         }}
       >
