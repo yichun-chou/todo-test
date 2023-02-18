@@ -8,9 +8,9 @@ import List from './TodoList'
 
 function TodoApp() {
   const data = [
-    { item: 'milk', count: 1, id: v4(), done: false },
-    { item: 'apple', count: 2, id: v4(), done: false },
-    { item: 'beef', count: 3, id: v4(), done: false },
+    { item: 'milk', count: 1, id: v4(), done: false, editing: true },
+    { item: 'apple', count: 2, id: v4(), done: false, editing: false },
+    { item: 'beef', count: 3, id: v4(), done: false, editing: false },
   ]
   const filterOptions = ['all', 'to do', 'done']
   const [currentFilter, setCurrentFilter] = useState('all')
@@ -41,6 +41,26 @@ function TodoApp() {
     })
   }
 
+  const toggleEditing = (arr, id) => {
+    return arr.map((el, i) => {
+      if (el.id === id) {
+        return { ...el, editing: !el.editing }
+      } else {
+        return { ...el, editing: false }
+      }
+    })
+  }
+
+  const saveChanges = (newItem, id) => {
+    return listItems.map((el) => {
+      if (el.id === id) {
+        return { ...el, item: newItem, editing: false }
+      } else {
+        return { ...el, editing: false }
+      }
+    })
+  }
+
   const getFilterTodos = (listItems, type) => {
     switch (type) {
       case 'to do':
@@ -59,7 +79,7 @@ function TodoApp() {
 
   // for Add to simplify ur code
   const createNewItem = (newItem) => {
-    return { item: newItem, count: 1, id: v4(), done: false }
+    return { item: newItem, count: 1, id: v4(), done: false, editing: false }
   }
 
   const handleAddItem = (item) => {
@@ -72,6 +92,13 @@ function TodoApp() {
   }
   const handleToggleDone = (id) => {
     setListItems(toggleDone(listItems, id))
+  }
+
+  const handleToggleEdit = (id) => {
+    setListItems(toggleEditing(listItems, id))
+  }
+  const handleSaveChange = (newItem, id) => {
+    setListItems(saveChanges(newItem, id))
   }
 
   return (
@@ -91,6 +118,8 @@ function TodoApp() {
         listItems={getFilterTodos(listItems, currentFilter)}
         handleDelTodo={handleDelTodo}
         handleToggleDone={handleToggleDone}
+        handleToggleEdit={handleToggleEdit}
+        handleSaveChange={handleSaveChange}
       />
       {filterOptions.map((el, i) => {
         return (

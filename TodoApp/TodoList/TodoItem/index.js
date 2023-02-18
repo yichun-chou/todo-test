@@ -1,7 +1,17 @@
 import React from 'react'
+import Edit from './Edit'
 
 function TodoItem(props) {
-  const { id, done, item, handleDelTodo, handleToggleDone } = props
+  const {
+    id,
+    done,
+    item,
+    editing,
+    handleDelTodo,
+    handleToggleDone,
+    handleToggleEdit,
+    handleSaveChange,
+  } = props
   return (
     <li
       key={id}
@@ -18,7 +28,23 @@ function TodoItem(props) {
           handleToggleDone(id)
         }}
       />
-      {item} <button>edit</button>{' '}
+      {editing ? (
+        <Edit id={id} item={item} handleSaveChange={handleSaveChange} />
+      ) : (
+        <>
+          {item}{' '}
+          <button
+            onClick={() => {
+              handleToggleEdit(id)
+            }}
+          >
+            edit
+          </button>
+        </>
+      )}
+      {/* <Edit item={item} />
+      {item}
+      <button>edit</button>{' '} */}
       <button
         onClick={() => {
           //   setListItems(delTodo(listItems, id))
