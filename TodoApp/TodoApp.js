@@ -12,7 +12,7 @@ function TodoApp() {
     { item: 'apple', count: 2, id: v4(), done: false },
     { item: 'beef', count: 3, id: v4(), done: false },
   ]
-  const filterStyle = ['all', 'checked', 'unchecked']
+  const filterOptions = ['all', 'to do', 'done']
   const [currentFilter, setCurrentFilter] = useState('all')
 
   const [listItems, setListItems] = useState(data)
@@ -39,6 +39,22 @@ function TodoApp() {
       }
       return { ...el }
     })
+  }
+
+  const getFilterTodos = (listItems, type) => {
+    switch (type) {
+      case 'to do':
+        return listItems.filter((el) => !el.done)
+      case 'done':
+        return listItems.filter((el) => el.done)
+      case 'all':
+      default:
+        return listItems
+    }
+    // if (type === 'to do') return listItems.filter((el) => !el.done)
+    // if (type === 'done') return listItems.filter((el) => el.done)
+
+    // return listItems
   }
 
   // for Add to simplify ur code
@@ -72,10 +88,23 @@ function TodoApp() {
        */}
       <Add handleAddItem={handleAddItem} />
       <List
-        listItems={listItems}
+        listItems={getFilterTodos(listItems, currentFilter)}
         handleDelTodo={handleDelTodo}
         handleToggleDone={handleToggleDone}
       />
+      {filterOptions.map((el, i) => {
+        return (
+          <button
+            key={i}
+            className={el === currentFilter ? 'selected' : ''}
+            onClick={() => {
+              setCurrentFilter(el)
+            }}
+          >
+            {el}
+          </button>
+        )
+      })}
     </>
   )
 }
