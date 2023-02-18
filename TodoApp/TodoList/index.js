@@ -2,7 +2,7 @@ import React from 'react'
 import TodoItem from './TodoItem'
 
 function List(props) {
-  const { listItems, setListItems, delTodo, toggleDone } = props
+  const { listItems, handleDelTodo, handleToggleDone } = props
   return (
     <>
       <ul>
@@ -14,10 +14,8 @@ function List(props) {
               id={id}
               done={done}
               item={item}
-              listItems={listItems}
-              setListItems={setListItems}
-              toggleDone={toggleDone}
-              delTodo={delTodo}
+              handleDelTodo={handleDelTodo}
+              handleToggleDone={handleToggleDone}
             />
           )
         })}

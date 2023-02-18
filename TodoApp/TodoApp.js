@@ -46,6 +46,14 @@ function TodoApp() {
     setListItems(addTodo(listItems, item))
   }
 
+  // for List
+  const handleDelTodo = (id) => {
+    setListItems(delTodo(listItems, id))
+  }
+  const handleToggleDone = (id) => {
+    setListItems(toggleDone(listItems, id))
+  }
+
   return (
     <>
       <h3>ToDo List</h3>
@@ -61,9 +69,8 @@ function TodoApp() {
       <Add handleAddItem={handleAddItem} />
       <List
         listItems={listItems}
-        setListItems={setListItems}
-        delTodo={delTodo}
-        toggleDone={toggleDone}
+        handleDelTodo={handleDelTodo}
+        handleToggleDone={handleToggleDone}
       />
     </>
   )

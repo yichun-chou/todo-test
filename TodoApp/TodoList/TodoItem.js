@@ -1,7 +1,7 @@
 import React from 'react'
 
 function TodoItem(props) {
-  const { id, done, item, listItems, setListItems, toggleDone, delTodo } = props
+  const { id, done, item, handleDelTodo, handleToggleDone } = props
   return (
     <li
       key={id}
@@ -14,13 +14,15 @@ function TodoItem(props) {
         id=""
         checked={done}
         onChange={(e) => {
-          setListItems(toggleDone(listItems, id))
+          //   setListItems(toggleDone(listItems, id))
+          handleToggleDone(id)
         }}
       />
       {item} <button>edit</button>{' '}
       <button
         onClick={() => {
-          setListItems(delTodo(listItems, id))
+          //   setListItems(delTodo(listItems, id))
+          handleDelTodo(id)
         }}
       >
         del
