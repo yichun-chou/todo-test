@@ -42,8 +42,12 @@ function TodoApp() {
   }
 
   // for Add to simplify ur code
+  const createNewItem = (newItem) => {
+    return { item: newItem, count: 1, id: v4(), done: false }
+  }
+
   const handleAddItem = (item) => {
-    setListItems(addTodo(listItems, item))
+    setListItems(addTodo(listItems, createNewItem(item)))
   }
 
   // for List
